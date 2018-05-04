@@ -23,7 +23,7 @@ void mabs_button_and_led_server(server interface mabs_led_button_if lb[n_lb],
 #ifndef MIC_BOARD_LED_STCP
         mabs_led_ports_t &leds,
 #else
-        client interface ma_bga167_led_if leds,
+        client interface ma_bga167_led_if? leds,
 #endif
         in port p_buttons){
 
@@ -97,7 +97,9 @@ void mabs_button_and_led_server(server interface mabs_led_button_if lb[n_lb],
 
             for(unsigned i=0; i<13; i++)
                 d=(d>>1)+(0x1000*(led_brightness[i]<=elapsed));
-            leds.set_leds(d);
+
+            if(!isnull(leds))
+                leds.set_leds(d);
 #else
 #if defined(PORT_LED0_TO_7)
             for(unsigned i=0;i<8;i++)

@@ -159,7 +159,7 @@ void mabs_button_and_led_server(server interface mabs_led_button_if lb[n_lb],
 #ifndef MIC_BOARD_LED_STCP
         mabs_led_ports_t &leds,
 #else
-        client interface ma_bga167_led_if leds,
+        client interface ma_bga167_led_if? leds,
 #endif
         in port p_buttons);
 
